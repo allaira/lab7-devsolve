@@ -4,9 +4,9 @@
     .project-card
       .card-header-row
         span.badge-sub ПОТОЧНИЙ ПРОЄКТ
-        button.dots-btn
+        button#btn-passport.dots-btn(type="button" title="Паспорт проєкту")
           i.bi.bi-three-dots
-      h2.project-title Назва проєкту
+      h2#project-name-display Назва проєкту
       hr.card-divider
       .manager-row
         span.manager-label Менеджер
@@ -14,184 +14,63 @@
           img.avatar-sm(src="/p1.jpg" alt="Ірина Коваль")
           span.manager-name Ірина Коваль
 
-    .sidebar-section-title ДОКУМЕНТАЦІЯ
-    ul.doc-list-plain
-      li.doc-item
-        i.bi.bi-file-earmark-text
-        span Паспорт проєкту
-      li.doc-item
-        i.bi.bi-book
-        span Технічне завдання
-      li.doc-item
-        i.bi.bi-calendar-event
-        span План-графік
+    //- US 3: Документація проєкту
+    .sidebar-section-title(style="display: flex; justify-content: space-between; align-items: center;")
+      span ДОКУМЕНТАЦІЯ
+      button#btn-upload-doc(type="button" style="background:none; border:none; color:#C2C7CF; font-size:11px; cursor:pointer;") + Додати
+    input#doc-upload-input(type="file" style="display: none")
+    #docs-list(style="margin-bottom: 16px;")
 
-    .sidebar-section-title ЕТАПИ ПРОЄКТУ
-    .phases-card
-      .phase-item
-        .phase-header
-          span.phase-name Аналітика
-          span.phase-pct 100%
-        .progress-track
-          .progress-bar(style="width: 100%")
+    //- US 2: Етапи проєкту
+    .sidebar-section-title(style="display: flex; justify-content: space-between; align-items: center;")
+      span ЕТАПИ ПРОЄКТУ
+      button#btn-add-stage(type="button" style="background:none; border:none; color:#C2C7CF; font-size:11px; cursor:pointer;") + Етап
+    .phases-card#stages-list
 
-      .phase-item
-        .phase-header
-          span.phase-name Розробка
-          span.phase-pct 68%
-        .progress-track
-          .progress-bar(style="width: 68%")
+    //- US 4: Команда проєкту
+    .sidebar-section-title(style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;")
+      span КОМАНДА
+      button#btn-add-member(type="button" style="background:none; border:none; color:#C2C7CF; font-size:11px; cursor:pointer;") + Учасник
+    #team-list(style="margin-bottom: 16px;")
 
-      .phase-item
-        .phase-header
-          span.phase-name Тестування
-          span.phase-pct 24%
-        .progress-track
-          .progress-bar(style="width: 24%")
-
-    .total-progress-box
+    //- US 10: Фінанси та бюджет етапу (лише для PM)
+    #pm-budget-box.total-progress-box(style="margin-top: 14px;")
       .tp-row
-        span.tp-title Загальний прогрес
-        span.tp-stat 142 / 180 год
-      .progress-track
-        .progress-bar(style="width: 78%")
-      span.tp-hint Залишилось 38 годин до п'ятниці
+        span.tp-title Бюджет етапу
+        span#budget-planned.tp-stat 120 000 грн
+      .tp-row(style="margin-top: 4px;")
+        span(style="font-size: 11px; color: #C2C7CF;") Фактичні витрати:
+        span#budget-spent(style="font-size: 11px; color: #fff;") 0 грн
+      .tp-row(style="margin-top: 4px;")
+        span(style="font-size: 11px; color: #C2C7CF;") Залишок:
+        span#budget-remaining(style="font-size: 12px; font-weight: bold; color: #4cd964;") 120 000 грн
 
-  //- дошка завдань
+  //- Центральна дошка завдань
   section.board-area
     .board-header
       .board-header-left
         span.sprint-tag РОЗРОБКА • СПРИНТ 1
         h2.board-title Дошка завдань
       .board-header-right
-        button.btn-circle
+        button.btn-circle(type="button")
           i.bi.bi-star
-        button.btn-circle
+        button.btn-circle(type="button")
           i.bi.bi-sliders
-        button.btn-create ＋ Створити
+        //- US 5: Створення завдання
+        button#btn-create-task.btn-create(type="button") ＋ Створити
 
     .board-toolbar
       .toolbar-left
         span.badge-deadline Дедлайн: 15 листопада
-        span.sprint-count 6 завдань у спринті
-      button.btn-filter
+        span#sprint-count.sprint-count 4 завдань у спринті
+      button.btn-filter(type="button")
         i.bi.bi-funnel
         span Фільтри
 
-    .kanban-grid
-      //- Колонка: До виконання
-      .column
-        .column-header
-          .col-name-wrap
-            span.status-circle.dot-gray ●
-            span До виконання
-          i.bi.bi-three-dots-vertical
-        
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-three-dots
-          h4.task-title Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p2.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
+    //- Усі колонки та картки тепер автоматично створює TypeScript через innerHTML
+    .kanban-grid#kanban-grid
 
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-three-dots
-          h4.task-title Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p3.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
-
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-three-dots
-          h4.task-title Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p4.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
-
-      //- Колонка: В процесі
-      .column
-        .column-header
-          .col-name-wrap
-            span.status-circle.dot-blue ●
-            span В процесі
-          i.bi.bi-three-dots-vertical
-
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-three-dots
-          h4.task-title Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p4.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
-
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-three-dots
-          h4.task-title Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p2.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
-
-      //- Колонка: На перевірці
-      .column
-        .column-header
-          .col-name-wrap
-            span.status-circle.dot-orange ●
-            span На перевірці
-          i.bi.bi-three-dots-vertical
-
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-three-dots
-          h4.task-title Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p5.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
-
-      //- Колонка: Виконано
-      .column.column-done
-        .column-header
-          .col-name-wrap
-            span.status-circle.dot-green ●
-            span Виконано
-          i.bi.bi-three-dots-vertical
-
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-check2.check-done
-          h4.task-title.completed Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p5_2.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
-
-        .task-card
-          .card-top
-            span.task-tag #TASK-XXX
-            i.bi.bi-check2.check-done
-          h4.task-title.completed Опис завдання
-          p.task-desc Детальний опис завдання
-          .card-bottom
-            img.user-pic(src="/p6.jpg" alt="Виконавець")
-            span.card-date DD.MM.YY
-
-    //- Нижня панель кнопок усередині дошки
+    //- Нижня панель кнопок усередині дошки (залишилась без змін)
     .board-bottom-bar
       .bottom-nav-left
         a.tab-item(href="#")
@@ -208,64 +87,101 @@
           i.bi.bi-kanban
           span Дошка
 
-  //- Права колонка
+  //- Права колонка деталей
   .right-column
     aside.details-panel
       .details-top-bar
         .details-titles
-          span.task-code ЗАВДАННЯ DS-238
+          span#details-task-id.task-code ЗАВДАННЯ TASK-101
           h2.details-heading Деталі, ТЗ та облік часу
-        button.btn-close-panel
+        button.btn-close-panel(type="button")
           i.bi.bi-x-lg
 
       .status-card-block
+        //- US 7: Селект зміни статусу
         span.field-tag СТАТУС
-        .status-dropdown
-          span В процесі
-          i.bi.bi-chevron-down
+        select#status-select.theme-input(style="width: 100%; margin-bottom: 10px; background: #302F33; color: #fff; border: 1px solid #636D79; border-radius: 6px; padding: 6px;")
+          option(value="todo") До виконання
+          option(value="in_progress") В процесі
+          option(value="review") На перевірці
+          option(value="done") Виконано
 
+        //- US 6: Селект призначення виконавця
+        span.field-tag ВИКОНАВЕЦЬ
+        select#assignee-select.theme-input(style="width: 100%; margin-bottom: 12px; background: #302F33; color: #fff; border: 1px solid #636D79; border-radius: 6px; padding: 6px;")
+
+        //- US 8: Оцінка та залишок
         .time-stats-grid
           .stat-card-item
             span.stat-label Оцінка
-            span.stat-value 16 год
+            span#details-estimate.stat-value 16 год
           .stat-card-item
             span.stat-label Залишилось
-            span.stat-value 8 год
+            span#details-remaining.stat-value 8 год
 
       .panel-section
         h3.panel-section-title Опис і вимоги
-        p.req-description На основі ТЗ, пункт 3.2, реалізувати механіку перетягування карток між колонками та збереження нового статусу.
+        p#details-desc.req-description На основі ТЗ, реалізувати форму обліку відпрацьованих годин.
         .attachment-chip
           i.bi.bi-paperclip
-          span T3_DevSolve_v2.pdf
+          span Технічне_завдання_МедЛаб_v2.pdf
 
       hr.panel-divider
 
+      //- US 8 та US 9: Внесення годин з лімітом 10 год/день
       .panel-section
         h3.panel-section-title Внести години
         .hours-inputs-row
           .input-group
             label.input-label Дата
-            input.theme-input(type="text" value="11.11.2026")
+            input#log-date.theme-input(type="date")
           .input-group
             label.input-label Години
-            input.theme-input(type="text" value="4")
+            input#log-hours.theme-input(type="number" step="0.1" min="0.1" max="10" placeholder="1-10")
+        .input-group(style="margin-top: 8px;")
+          input#log-comment.theme-input(type="text" placeholder="Коментар до виконаної роботи...")
         span.hint-limit Максимум 10 годин на день
-        button.btn-submit-log Зберегти години в журнал
+        button#btn-save-log.btn-submit-log(type="button") Зберегти години в журнал
 
       hr.panel-divider
 
+      //- Журнал історії
       .panel-section
         .history-header-row
           span.panel-section-title Історія
           a.history-link(href="#") Уся історія
-        .history-entry-card
-          .history-entry-top
-            i.bi.bi-clock.history-clock-icon
-            strong.history-hours 5 жовтня • 8 год
-          hr.history-inner-divider
-          p.history-user Додано Андрієм Левченком
+        #history-list
 
     .status-capsule
       span Документація API • Стабільність 99.8% • 
       span.status-online ● Онлайн
+
+#project-modal.modal-overlay
+  .modal-dialog
+    .modal-header
+      span.badge-sub ПАСПОРТ ПРОЄКТУ
+      h2.modal-title Створення нового проєкту
+      p.modal-desc Заповніть форму паспорта для запуску робочого простору DevSolve
+    
+    form#project-form
+      .modal-field
+        label.modal-label(for="proj-input-name") Назва проєкту *
+        input#proj-input-name.theme-input(type="text" placeholder="Наприклад: Система діагностики «МедЛаб»" value="Система лабораторної діагностики «МедЛаб»" required)
+
+      .modal-field
+        label.modal-label(for="proj-input-client") Замовник
+        input#proj-input-client.theme-input(type="text" placeholder="Замовник робіт" value="Міська клінічна лікарня")
+
+      .modal-row
+        .modal-field
+          label.modal-label(for="proj-input-start") Дата старту *
+          input#proj-input-start.theme-input(type="date" value="2026-10-01" required)
+        .modal-field
+          label.modal-label(for="proj-input-deadline") Дедлайн
+          input#proj-input-deadline.theme-input(type="date" value="2026-12-31")
+
+      .modal-field
+        label.modal-label(for="proj-input-desc") Короткий опис (до 500 символів)
+        textarea#proj-input-desc.theme-input(rows="3" placeholder="Опишіть мету та задачі...") Розробка вебплатформи для автоматизації обліку лабораторних досліджень.
+
+      button#btn-submit-project.btn-submit-log(type="submit" style="margin-top: 14px; width: 100%;") Створити та відкрити проєкт

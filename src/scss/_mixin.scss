@@ -40,3 +40,8 @@ $w-details: 420px;
     color: $c-white;
   }
 }
+@mixin tablet {
+  @media (max-width: 1100px) {
+    @content;
+  }
+}

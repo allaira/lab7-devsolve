@@ -8,11 +8,12 @@
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
   background-color: $c-1;
   color: $c-5;
   font-size: 14px;
   line-height: 1.4;
-  overflow-x: hidden;
 }
 
 
@@ -23,6 +24,13 @@ body {
   padding: 10px 24px;
   @include flex-box(space-between, center);
   font-size: 13px;
+
+  @include tablet {
+    flex-wrap: wrap;
+    gap: 12px;
+    height: auto;
+    padding: 12px 16px;
+  }
 
   .cookie-left {
     @include flex-box(flex-start, center, 10px);
@@ -51,6 +59,13 @@ body {
   border-bottom: 1px solid $c-4;
   padding: 14px 28px;
   @include flex-box(space-between, center);
+
+  @include tablet {
+    flex-wrap: wrap;
+    gap: 16px;
+    height: auto;
+    padding: 14px 16px;
+  }
 
   .header-left {
     @include flex-box(flex-start, center, 32px);
@@ -86,7 +101,7 @@ body {
 
   .header-right {
     @include flex-box(flex-end, center, 14px);
-
+    flex-wrap: wrap;
     .search-box {
       background: $c-5;
       border: 1px solid $c-4;
@@ -141,7 +156,19 @@ body {
   gap: 18px;
   padding: 18px 24px;
   min-height: calc(100vh - 110px);
-}
+
+  > * {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  }
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 24px;
+    padding: 16px;
+}}
 
 .badge-sub { font-size: 11px; font-weight: 700; color: $c-5; letter-spacing: 0.5px; }
 .dots-btn { background: none; border: none; color: $c-5; cursor: pointer; font-size: 16px; }
@@ -229,7 +256,11 @@ body {
 .board-area {
   @include card-box($c-2, 14px, 18px 18px 10px);
   @include flex-box(flex-start, stretch, 14px, column);
-
+  @include tablet {
+    padding-bottom: 12px;
+    min-width: 0;
+    width: 100%; 
+  }
   .board-header {
     @include flex-box(space-between, center);
 
@@ -280,6 +311,13 @@ body {
     gap: 14px;
     flex: 1;
 
+    @include tablet {
+      grid-template-columns: repeat(4, 250px); 
+      overflow-x: auto;
+      padding-bottom: 12px;
+      width: 100%;
+    }
+    
     .column {
       @include card-box($c-1, 12px, 14px);
       @include flex-box(flex-start, stretch, 12px, column);
@@ -499,4 +537,91 @@ body {
   @include flex-box(center, center, 8px);
 
   .status-online { color: $c-white; font-weight: 600; }
+}
+
+#log-comment{
+  width: 100%;
+  box-sizing: border-box;
+  background-color:#302F33;
+  color: #fff;
+  border: 1px solid #636D79;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  outline:none;
+  margin-top:8px;
+  margin-bottom:10px;
+
+  &:focus{
+    border-color:#fff;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  .modal-dialog {
+    background-color: #1f1e24;
+    border: 1px solid #464c55;
+    border-radius: 12px;
+    padding: 24px;
+    width: 480px;
+    max-width: 90%;
+    color: #fff;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    margin: 6px 0 16px;
+  }
+
+  .modal-field {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+      font-size: 11px;
+      color: #c2c7cf;
+    }
+
+    input, textarea {
+      background-color: #30343c;
+      border: 1px solid #4f5662;
+      border-radius: 6px;
+      color: #fff;
+      padding: 8px 10px;
+      font-size: 13px;
+      color-scheme: dark; // Робить іконку календаря білою
+    }
+  }
+
+  .modal-row {
+    display: flex;
+    gap: 12px;
+    .modal-field { flex: 1; }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    background-color: #c2c7cf;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+
+    &:hover {
+      background-color: #fff;
+    }
+  }
 }

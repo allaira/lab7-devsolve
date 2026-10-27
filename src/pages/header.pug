@@ -6,14 +6,14 @@
   ]
 
 //- Cookie
-.cookie-banner
+.cookie-banner#cookie-banner
   .cookie-left
     i.bi.bi-cookie.cookie-icon
     span.cookie-text Ми використовуємо cookie, щоб зробити роботу в DevSolve зручнішою. 
     a.cookie-link(href="#") Детальніше
   .cookie-actions
     button.btn-cookie-outline Параметри
-    button.btn-cookie-dark Згодитися
+    button#cookie-accept.btn-cookie-dark Згодитися
 
 //- Верхня шапка з генерацією меню через цикл each
 header.top-header
@@ -31,9 +31,14 @@ header.top-header
           span= item.name
 
   .header-right
+    .role-switcher(style="display: flex; align-items: center; gap: 8px; margin-right: 12px;")
+      label(style="color: #C2C7CF; font-size: 12px;") Роль:
+      select#role-select(style="background: #302F33; color: #fff; border: 1px solid #636D79; border-radius: 6px; padding: 4px 8px; font-size: 12px;")
+        option(value="pm" selected) Менеджер (PM)
+        option(value="dev") Розробник
     .search-box
       i.bi.bi-search
-      input(type="text" placeholder="Пошук...")
+      input#search-input(type="text" placeholder="Пошук завдань або тегів...")
     button.btn-icon
       i.bi.bi-bell
     .user-pill
